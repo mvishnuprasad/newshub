@@ -24,7 +24,7 @@ class NewsAPIService {
               .map((articleJson) => Article.fromJson(articleJson))
               .toList();
           print(articles);
-          return articles;
+          return response;
         }
       } else {
         print(response.statusCode);
