@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newshub/models/listmodel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/options.dart';
+import '../constants/constants.dart';
 
 void main() {
   runApp(
@@ -54,9 +55,9 @@ class UserProfile extends StatelessWidget {
                     ],
                   ),
                 ),
-                const CircleAvatar(
+                 CircleAvatar(
                   radius: 80,
-                  backgroundImage: NetworkImage('https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg'),
+                  backgroundImage: NetworkImage(URLConstants().profilePic),
                 ),
                 const SizedBox(
                   height: 20,

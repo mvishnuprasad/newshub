@@ -11,6 +11,7 @@ class NewsCard extends StatelessWidget {
   final String source;
   final String category;
   final String? url;
+  final String? description;
   const NewsCard({
     super.key,
     required this.title,
@@ -18,6 +19,7 @@ class NewsCard extends StatelessWidget {
     required this.source,
     required this.category,
     required this.url,
+    required this.description,
   });
 
   @override
@@ -101,7 +103,7 @@ class NewsCard extends StatelessWidget {
                                 isScrollControlled: true,
 
                                 builder: (context) =>
-                                    const DetailedNews(), // The page to display as a bottom sheet
+                                     DetailedNews(title: title,author: author,source: source,category: category,url: url,description: description,) // The page to display as a bottom sheet
                               );
                             },
                             child: Text(

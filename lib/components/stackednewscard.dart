@@ -10,13 +10,14 @@ class StackedNewsCard extends StatefulWidget {
   final String source;
   final String category;
   final String? url;
+  final String? description;
   const StackedNewsCard({
     super.key,
     required this.title,
     required this.author,
     required this.source,
     required this.category,
-    required this.url,
+    required this.url, this.description,
   });
 
   @override
@@ -125,7 +126,7 @@ class StackedNewsCardState extends State<StackedNewsCard> {
                             context: context,
                             isScrollControlled: true,
                             builder: (context) =>
-                                const DetailedNews(), // The page to display as a bottom sheet
+                                 DetailedNews(title: widget.title,author: widget.author,source: widget.source,category: widget.category,url: widget.url,description: widget.description,), // The page to display as a bottom sheet
                           );
                         },
                         child: Text(

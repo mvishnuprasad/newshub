@@ -48,5 +48,6 @@ NewsCard newsCard(List<Article> articleList, int index) {
         ? "Geopolitics"
         : articleList[index].publishedAt.substring(11, 16),
     url: articleList[index].urlToImage,
+    description: articleList[index].content,
   );
 }

@@ -1,14 +1,21 @@
+import '../models/newsapimodel.dart';
+
 class URLConstants {
   String topHeadlines = "https://newsapi.org/v2/top-headlines";
-  String sampleImage = 'https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
+  String everyThing = "https://newsapi.org/v2/everything";
+  String sampleImage =
+      'https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
+  String profilePic =
+      'https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg';
 }
-class EndPoints {
 
-}
+class EndPoints {}
 
 class TempNews {
-  String title = "Did Saudi Arabia really end petrodollar deal? UBS economist clarifies";
-  String description = "Reports of Saudi Arabia ending the longstanding petrodollar deal with the US "
+  String title =
+      "Did Saudi Arabia really end petrodollar deal? UBS economist clarifies";
+  String description =
+      "Reports of Saudi Arabia ending the longstanding petrodollar deal with the US "
       "emerged last week, sparking online discussions about the potential decline of the dollar as the world's reserve currency. "
       "However, amid growing speculation about the imminent decline of the US dollars global dominance, several experts highlighted "
       "a critical flaw about the end of the petrodollar deal, pointing out there was never an agreement to begin with Paul Donovan, the "
@@ -19,6 +26,19 @@ class TempNews {
       " arrangement may have been made due to Saudi Arabia's need to invest the excess revenue from its oil sales.The US and Saudi Arabia "
       "did establish a Joint Commission for economic cooperation in June 1974. This aim was to help Saudi Arabia spend its sudden glut of "
       "dollars on US products. In July of that year, Saudi agreed to invest oil dollars in US Treasuries (this was kept confidential until 2016),"
-      " said Donovan in the blog post." ;
+      " said Donovan in the blog post.";
 }
 
+class Initializers {
+  final List<Article> emptyList = [
+    Article(
+        source: Source(id: "id", name: "name"),
+        author: "author",
+        title: "title",
+        description: "description",
+        url: "url",
+        urlToImage: "urlToImage",
+        publishedAt: "publishedAt",
+        content: "content")
+  ];
+}

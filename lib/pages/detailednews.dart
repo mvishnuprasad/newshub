@@ -3,15 +3,25 @@ import 'package:newshub/constants/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../components/icons.dart';
+import '../models/newsapimodel.dart';
 
-class DetailedNews extends StatefulWidget {
-  const DetailedNews({super.key});
+class DetailedNews extends StatelessWidget {
+  final String title;
+  final String author;
+  final String source;
+  final String category;
+  final String? url;
+  final String? description;
 
-  @override
-  State<DetailedNews> createState() => _DetailedNewsState();
-}
+  const DetailedNews(
+      {super.key,
+      required this.title,
+      required this.author,
+      required this.source,
+      required this.category,
+      this.url,
+      this.description});
 
-class _DetailedNewsState extends State<DetailedNews> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -58,14 +68,14 @@ class _DetailedNewsState extends State<DetailedNews> {
                 child: Column(
                   children: [
                     Text(
-                      TempNews().title,
+                      title,
                       style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold)),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,14 +86,14 @@ class _DetailedNewsState extends State<DetailedNews> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Ron Miller",
-                                  style: TextStyle(
+                                  author,
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                       fontSize: 12),
                                   maxLines: 3,
                                 ),
-                                Padding(
+                                const Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Icon(
@@ -92,8 +102,8 @@ class _DetailedNewsState extends State<DetailedNews> {
                                   ),
                                 ),
                                 Text(
-                                  "The Economist",
-                                  style: TextStyle(
+                                  source,
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.w900,
                                       color: Colors.grey,
                                       fontSize: 12),
@@ -103,7 +113,7 @@ class _DetailedNewsState extends State<DetailedNews> {
                           ),
                           Row(
                             children: [
-                              Padding(
+                              const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 6.0),
                                 child: Icon(
                                   Icons.access_time_filled,
@@ -112,8 +122,8 @@ class _DetailedNewsState extends State<DetailedNews> {
                                 ),
                               ),
                               Text(
-                                "12 Minutes ago",
-                                style: TextStyle(
+                                category,
+                                style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
                                     fontSize: 12),
@@ -124,10 +134,11 @@ class _DetailedNewsState extends State<DetailedNews> {
                       ),
                     ),
                     Text(
-                      TempNews().description,
+                      description ?? TempNews().description,
                       style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w500)),
+                        textStyle: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w500),
+                      ),
                     ),
                   ],
                 ),
