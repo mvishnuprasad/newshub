@@ -16,5 +16,6 @@ Detailed news page.
 Add to favorites.
 News by category.
 
+More features will be added later
 
 
