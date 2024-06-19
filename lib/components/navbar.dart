@@ -22,7 +22,7 @@ class NavBarState extends State<navBar> {
     const Homepage(),
     const Categories(),
     const SavedArticles(),
-    const Profile(),
+    const UserProfile(),
   ];
 
   void onItemTapped(int index) {

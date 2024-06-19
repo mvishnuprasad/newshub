@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:newshub/components/icons.dart';
-import 'package:newshub/components/newsCard.dart';
+import 'package:newshub/components/newscard.dart';
+import 'package:newshub/components/stackednewscard.dart';
 import 'package:newshub/constants/constants.dart';
 import 'package:newshub/models/newsapimodel.dart';
 import 'package:newshub/services/apiservice.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/navbar.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -45,6 +47,23 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> customWidgets = [
+      StackedNewsCard(
+          title: TempNews().title,
+          author: "author",
+          source: "source",
+          category: "category"),
+      StackedNewsCard(
+          title: TempNews().title,
+          author: "author",
+          source: "source",
+          category: "category"),
+      StackedNewsCard(
+          title: TempNews().title,
+          author: "author",
+          source: "source",
+          category: "category"),
+    ];
     double width = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -76,9 +95,44 @@ class _HomepageState extends State<Homepage> {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20,bottom: 30),
                   child: Text(
                     "Breaking News",
+                    style: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
+                ),
+                CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200,
+                    enableInfiniteScroll: true,
+                    autoPlay: false,
+                    autoPlayInterval: const Duration(seconds: 5),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 1200),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: false,
+                    scrollDirection: Axis.horizontal,
+                    viewportFraction: 1
+                  ),
+                  items: customWidgets.map((widget) {
+                    return Builder(
+                      builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: const EdgeInsets.symmetric(horizontal: 25.0),
+                          child: widget,
+                        );
+                      },
+                    );
+                  }).toList(),
+                ),
+                Container(
+                  padding: const EdgeInsets.only(top: 30, left: 20, right: 20,bottom: 20),
+                  child: Text(
+                    "Recommendations",
                     style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold)),
@@ -92,12 +146,14 @@ class _HomepageState extends State<Homepage> {
                       itemCount: 5,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(top: 10.0, bottom: 10),
-                          child: NewsCard(
-                              title: TempNews().title,
-                              author: "Ron Miller",
-                              source: "Reuters",
-                              category: "Geopolitics"),
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: Container(
+                            child: NewsCard(
+                                title: TempNews().title,
+                                author: "Ron Miller",
+                                source: "Reuters",
+                                category: "Geopolitics"),
+                          ),
                         );
                       }),
                 )
