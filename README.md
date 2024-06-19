@@ -16,5 +16,5 @@ Detailed news page.
 Add to favorites.
 News by category.
 
-Your API key is: 353f56640b9e400aab4e5ff95981fb5b
+
 
