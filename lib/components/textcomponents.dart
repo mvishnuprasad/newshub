@@ -6,20 +6,7 @@ class TextWithBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double measureTextWidth(String text, double fontSize,
-        {FontStyle? fontStyle}) {
-      final textStyle = TextStyle(
-        fontSize: fontSize,
-        fontStyle: fontStyle ?? FontStyle.normal,
-      );
-      final textSpan = TextSpan(text: text, style: textStyle);
-      final textPainter = TextPainter(
-        text: textSpan,
-        textDirection: TextDirection.ltr,
-      );
-      textPainter.layout();
-      return textPainter.width;
-    }
+
 
     return Container(
       width: measureTextWidth(title, 12) + 10,
@@ -40,4 +27,18 @@ class TextWithBackground extends StatelessWidget {
       ),
     );
   }
+}
+double measureTextWidth(String text, double fontSize,
+    {FontStyle? fontStyle}) {
+  final textStyle = TextStyle(
+    fontSize: fontSize,
+    fontStyle: fontStyle ?? FontStyle.normal,
+  );
+  final textSpan = TextSpan(text: text, style: textStyle);
+  final textPainter = TextPainter(
+    text: textSpan,
+    textDirection: TextDirection.ltr,
+  );
+  textPainter.layout();
+  return textPainter.width;
 }

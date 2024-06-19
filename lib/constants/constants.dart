@@ -1,5 +1,6 @@
 class URLConstants {
   String topHeadlines = "https://newsapi.org/v2/top-headlines";
+  String sampleImage = 'https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 }
 class EndPoints {
 
@@ -20,3 +21,4 @@ class TempNews {
       "dollars on US products. In July of that year, Saudi agreed to invest oil dollars in US Treasuries (this was kept confidential until 2016),"
       " said Donovan in the blog post." ;
 }
+

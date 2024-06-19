@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:newshub/main.dart';
-import 'package:newshub/pages/homepage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:newshub/providers/newsprovider.dart';
+
+import '../models/newsapimodel.dart';
+import '../services/apiservice.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});
@@ -21,9 +25,11 @@ class LaunchScreen extends StatefulWidget {
 }
 
 class LaunchScreenState extends State<LaunchScreen> {
+  List<Article> imageURLList = [];
   @override
   void initState() {
     super.initState();
+
     Future.delayed(const Duration(milliseconds: 3000), () {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const NewsHub()));

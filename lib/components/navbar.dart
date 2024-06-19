@@ -19,7 +19,7 @@ class navBar extends StatefulWidget {
 class NavBarState extends State<navBar> {
   int selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
-    const Homepage(),
+     HomePage(),
     const Categories(),
     const SavedArticles(),
     const UserProfile(),

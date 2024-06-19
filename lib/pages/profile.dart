@@ -56,7 +56,7 @@ class UserProfile extends StatelessWidget {
                 ),
                 const CircleAvatar(
                   radius: 80,
-                  backgroundImage: AssetImage('lib/assets/avtar.png'),
+                  backgroundImage: NetworkImage('https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg'),
                 ),
                 const SizedBox(
                   height: 20,

@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:newshub/components/textcomponents.dart';
 import 'package:newshub/pages/detailednews.dart';
+
+import '../constants/constants.dart';
 
 class NewsCard extends StatelessWidget {
   final String title;
   final String author;
   final String source;
   final String category;
+  final String? url;
   const NewsCard({
     super.key,
     required this.title,
     required this.author,
     required this.source,
     required this.category,
+    required this.url,
   });
 
   @override
@@ -52,7 +57,8 @@ class NewsCard extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            'https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                            // ,
+                            url ?? URLConstants().sampleImage,
                             alignment: Alignment.topCenter,
                             fit: BoxFit.cover,
                           ),
@@ -89,19 +95,21 @@ class NewsCard extends StatelessWidget {
                             maxHeight: 80,
                           ),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               showModalBottomSheet(
                                 context: context,
                                 isScrollControlled: true,
 
-                                builder: (context) => const DetailedNews(), // The page to display as a bottom sheet
+                                builder: (context) =>
+                                    const DetailedNews(), // The page to display as a bottom sheet
                               );
                             },
                             child: Text(
                               title,
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
-                                      fontSize: 14, fontWeight: FontWeight.bold)),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold)),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 3,
                             ),
@@ -116,13 +124,20 @@ class NewsCard extends StatelessWidget {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    author,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                        fontSize: 12),
-                                    maxLines: 3,
+                                  ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      maxWidth: width * 0.5 * 0.3,
+                                      maxHeight: 80,
+                                    ),
+                                    child: Text(
+                                      author,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          fontSize: 12),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                   const Padding(
                                     padding:
@@ -132,12 +147,20 @@ class NewsCard extends StatelessWidget {
                                       size: 6,
                                     ),
                                   ),
-                                  Text(
-                                    source,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        color: Colors.grey,
-                                        fontSize: 12),
+                                  ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                      maxWidth: width * 0.5 * 0.3,
+                                      maxHeight: 80,
+                                    ),
+                                    child: Text(
+                                      source,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.grey,
+                                          fontSize: 12),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 ],
                               ),
