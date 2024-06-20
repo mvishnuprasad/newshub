@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newshub/models/listmodel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/options.dart';
-import '../constants/constants.dart';
+import '../constants/url_constants.dart';
 
 void main() {
   runApp(

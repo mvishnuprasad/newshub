@@ -1,15 +1,8 @@
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 import '../models/newsapimodel.dart';
-
-class URLConstants {
-  String topHeadlines = "https://newsapi.org/v2/top-headlines";
-  String everyThing = "https://newsapi.org/v2/everything";
-  String sampleImage =
-      'https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
-  String profilePic =
-      'https://imgv3.fotor.com/images/blog-cover-image/10-profile-picture-ideas-to-make-you-stand-out.jpg';
-}
-
-class EndPoints {}
 
 class TempNews {
   String title =
@@ -29,6 +22,7 @@ class TempNews {
       " said Donovan in the blog post.";
 }
 
+
 class Initializers {
   final List<Article> emptyList = [
     Article(
@@ -41,4 +35,23 @@ class Initializers {
         publishedAt: "publishedAt",
         content: "content")
   ];
+  final List<String> categories = [
+    'Business',
+    'Entertainment',
+    'General',
+    'Health',
+    'Science',
+    'Sports',
+    'Technology',
+  ];
+  final List<IconData> categoryIcons = [
+    Icons.business_center_outlined,
+    Icons.movie_outlined,
+    Icons.all_inclusive_outlined,
+    Icons.healing_outlined,
+    Icons.science_outlined,
+    Icons.sports_baseball_outlined,
+    Icons.laptop_outlined,
+  ];
+
 }

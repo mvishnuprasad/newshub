@@ -1,39 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
-import 'package:newshub/pages/detailednews.dart';
-import '../constants/url_constants.dart';
-import '../persistance/newsmodel.dart';
+import 'package:newshub/pages/saved_detailnews.dart';
 
-class NewsCard extends StatelessWidget {
+class SavedNewsCard extends StatelessWidget {
   final String title;
   final String author;
   final String source;
   final String category;
-  final String? url;
-  final String? content;
-  const NewsCard({
+  final String? description;
+  const SavedNewsCard({
     super.key,
     required this.title,
     required this.author,
     required this.source,
     required this.category,
-    required this.url,
-    required this.content,
+    required this.description,
   });
-  void _saveToHive() async {
-    final newsBox = await Hive.openBox<NewsModel>('newsBox');
-    var newsModel = NewsModel(
-      title: title,
-      author: author,
-      source: source,
-      category: category,
-      url: url,
-      description: content,
-    );
-    await newsBox.add(newsModel);
-    Hive.close();
-  }
+
   @override
   Widget build(BuildContext context) {
     double padding = 10;
@@ -42,7 +25,7 @@ class NewsCard extends StatelessWidget {
     return Center(
       child: Column(children: [
         Container(
-            width: width - 50,
+            width: width - 40,
             height: 140,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -64,27 +47,12 @@ class NewsCard extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: width * 0.3,
-                      child: AspectRatio(
-                        aspectRatio: 1.0,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            // ,
-                            url ?? URLConstants().sampleImage,
-                            alignment: Alignment.topCenter,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: width * 0.5,
+                          width: width * 0.8,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -105,7 +73,7 @@ class NewsCard extends StatelessWidget {
                         ),
                         ConstrainedBox(
                           constraints: BoxConstraints(
-                            maxWidth: width * 0.5,
+                            maxWidth: width * 0.8,
                             maxHeight: 80,
                           ),
                           child: GestureDetector(
@@ -113,15 +81,14 @@ class NewsCard extends StatelessWidget {
                               showModalBottomSheet(
                                   context: context,
                                   isScrollControlled: true,
-                                  builder: (context) => DetailedNews(
-                                        title: title,
-                                        author: author,
-                                        source: source,
-                                        category: category,
-                                        url: url,
-                                        description: content,
-                                      ) // The page to display as a bottom sheet
-                                  );
+                                  builder: (context) => SavedDetailNews(
+                                    title: title,
+                                    author: author,
+                                    source: source,
+                                    category: category,
+                                    description: description,
+                                  ) // The page to display as a bottom sheet
+                              );
                             },
                             child: Text(
                               title,
@@ -136,7 +103,7 @@ class NewsCard extends StatelessWidget {
                         ),
 
                         SizedBox(
-                          width: width * 0.5,
+                          width: width * 0.8,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -145,7 +112,7 @@ class NewsCard extends StatelessWidget {
                                 children: [
                                   ConstrainedBox(
                                     constraints: BoxConstraints(
-                                      maxWidth: width * 0.5 * 0.3,
+                                      maxWidth: width * 0.8 * 0.3,
                                       maxHeight: 80,
                                     ),
                                     child: Text(
@@ -184,8 +151,8 @@ class NewsCard extends StatelessWidget {
                                 ],
                               ),
                               GestureDetector(
-                                onTap: (){
-                                  _saveToHive();
+                                onTap: () {
+                                  //_saveToHive();
                                 },
                                 child: const Icon(
                                   Icons.bookmark,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newshub/pages/categorynews.dart';
 
 class CategoryOption extends StatelessWidget {
   final String title;
@@ -40,9 +41,17 @@ class CategoryOption extends StatelessWidget {
               ],
             ),
           ),
-          const Icon(
-            Icons.chevron_right,
-            color: Colors.black,
+          GestureDetector(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) => const CategoryNews());
+            },
+            child: const Icon(
+              Icons.chevron_right,
+              color: Colors.black,
+            ),
           )
         ],
       ),
@@ -88,7 +97,6 @@ class ProfileOption extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

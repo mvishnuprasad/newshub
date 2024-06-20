@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../components/newscard.dart';
 import '../components/stackednewscard.dart';
-import '../constants/constants.dart';
+import '../constants/initializers.dart';
+import '../constants/url_constants.dart';
 import '../models/newsapimodel.dart';
 
 List<Widget> generateStackedNewsCards(List<Article> articleList) {
@@ -48,6 +49,9 @@ NewsCard newsCard(List<Article> articleList, int index) {
         ? "Geopolitics"
         : articleList[index].publishedAt.substring(11, 16),
     url: articleList[index].urlToImage,
-    description: articleList[index].content,
+    content: articleList[index].content.isEmpty ||
+            articleList[index].content == "[Removed]"
+        ? TempNews().description
+        : articleList[index].content,
   );
 }

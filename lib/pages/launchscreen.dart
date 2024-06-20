@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newshub/main.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:newshub/providers/newsprovider.dart';
-
 import '../models/newsapimodel.dart';
-import '../services/apiservice.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});

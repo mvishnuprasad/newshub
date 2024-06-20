@@ -6,8 +6,6 @@ class TextWithBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
       width: measureTextWidth(title, 12) + 10,
       height: 24,
@@ -28,8 +26,8 @@ class TextWithBackground extends StatelessWidget {
     );
   }
 }
-double measureTextWidth(String text, double fontSize,
-    {FontStyle? fontStyle}) {
+
+double measureTextWidth(String text, double fontSize, {FontStyle? fontStyle}) {
   final textStyle = TextStyle(
     fontSize: fontSize,
     fontStyle: fontStyle ?? FontStyle.normal,

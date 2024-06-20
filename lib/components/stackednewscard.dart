@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newshub/components/textcomponents.dart';
-import 'package:newshub/constants/constants.dart';
+import 'package:newshub/constants/url_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../pages/detailednews.dart';
 

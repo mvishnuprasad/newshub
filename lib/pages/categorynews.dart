@@ -7,15 +7,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../methods/list_generate_methods.dart';
 import '../services/dataprovider.dart';
 
-class HomePage extends ConsumerWidget {
-  const HomePage({super.key});
+class CategoryNews extends ConsumerWidget {
+  const CategoryNews({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userData = ref.watch(countryDataProvider);
-
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
         body: userData.when(
@@ -53,33 +51,6 @@ class HomePage extends ConsumerWidget {
                           maxLines: 3,
                         ),
                         const SizedBox(height: 20),
-                        CarouselSlider(
-                          options: CarouselOptions(
-                            height: 200,
-                            enableInfiniteScroll: true,
-                            autoPlay: false,
-                            autoPlayInterval: const Duration(seconds: 5),
-                            autoPlayAnimationDuration:
-                                const Duration(milliseconds: 1200),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: false,
-                            scrollDirection: Axis.horizontal,
-                            viewportFraction: 1,
-                          ),
-                          items: generateStackedNewsCards(articleList)
-                              .map((widget) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10.0),
-                                  child: widget,
-                                );
-                              },
-                            );
-                          }).toList(),
-                        ),
                         const SizedBox(height: 20),
                         Text(
                           "Recommendations",

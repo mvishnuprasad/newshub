@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:newshub/constants/initializers.dart';
 import '../components/options.dart';
 
 class Categories extends StatefulWidget {
@@ -33,13 +34,22 @@ class _CategoriesState extends State<Categories> {
                   height: 30,
                 ),
                 Expanded(
-                  child: ListView(
-                    children: const [
-                      CategoryOption(
-                          title: 'Sports',
-                          iconName: Icons.sports_basketball,
-                          color: Colors.blueAccent),
-                    ],
+                  child:
+                  ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: Initializers().categories.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding:
+                        const EdgeInsets.symmetric(vertical: 20.0),
+                        child: CategoryOption(
+                            title: Initializers().categories[index],
+                            iconName: Initializers().categoryIcons[index],
+                            color: Colors.blueAccent),
+                      );
+                    },
                   ),
                 ),
               ],
