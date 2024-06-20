@@ -74,16 +74,6 @@ class SavedNewsCard extends StatelessWidget {
                                     color: Colors.grey,
                                     fontSize: 12),
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  delete(index);
-                                },
-                                child: const Icon(
-                                  Icons.delete_outline,
-                                  size: 32.0,
-                                  color: Colors.grey,
-                                ),
-                              )
                             ],
                           ),
                         ),
@@ -151,7 +141,7 @@ class SavedNewsCard extends StatelessWidget {
                                   ),
                                   ConstrainedBox(
                                     constraints: BoxConstraints(
-                                      maxWidth: width * 0.5 * 0.3,
+                                      maxWidth: width * 0.5 * 0.5,
                                       maxHeight: 80,
                                     ),
                                     child: Text(
@@ -168,10 +158,10 @@ class SavedNewsCard extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  //_saveToHive();
+                                  delete(index);
                                 },
                                 child: const Icon(
-                                  Icons.bookmark,
+                                  Icons.delete_outline_outlined,
                                   size: 28.0,
                                   color: Colors.grey,
                                 ),

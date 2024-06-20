@@ -32,6 +32,7 @@ List<Widget> generateStackedNewsCards(List<Article> articleList) {
 
 NewsCard newsCard(List<Article> articleList, int index) {
   return NewsCard(
+    index : index,
     title: (articleList[index].title.isEmpty ||
             articleList[index].title == "[Removed]")
         ? TempNews().title
@@ -53,5 +54,6 @@ NewsCard newsCard(List<Article> articleList, int index) {
             articleList[index].content == "[Removed]"
         ? TempNews().description
         : articleList[index].content,
+
   );
 }

@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:newshub/pages/home_detailed.dart';
+import 'package:newshub/persistance/hive_methods.dart';
 import '../constants/url_constants.dart';
 import '../persistance/newsmodel.dart';
+import '../services/dataprovider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NewsCard extends StatefulWidget {
+class NewsCard extends ConsumerWidget {
   final String title;
   final String author;
   final String source;
   final String category;
   final String? url;
   final String? content;
+  final int index;
   const NewsCard({
     super.key,
     required this.title,
@@ -20,40 +24,14 @@ class NewsCard extends StatefulWidget {
     required this.category,
     required this.url,
     required this.content,
+    required this.index,
   });
 
   @override
-  State<NewsCard> createState() => _NewsCardState();
-}
-
-class _NewsCardState extends State<NewsCard> {
-  bool isBookmarked = false;
-
-  void _toggleBookmark() {
-    setState(() {
-      isBookmarked = !isBookmarked;
-    });
-  }
-
-  void _saveToHive() async {
-    final newsBox = await Hive.openBox<NewsModel>('newsBox');
-    var newsModel = NewsModel(
-      title: widget.title,
-      author: widget.author,
-      source: widget.source,
-      category: widget.category,
-      url: widget.url,
-      description: widget.content,
-    );
-    await newsBox.add(newsModel);
-    Hive.close();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double padding = 10;
     double width = MediaQuery.of(context).size.width;
-
+    final isBookmarked = ref.watch(bookmarkedProvider);
     return Center(
       child: Column(children: [
         Container(
@@ -87,7 +65,7 @@ class _NewsCardState extends State<NewsCard> {
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
                             // ,
-                            widget.url ?? URLConstants().sampleImage,
+                            url ?? URLConstants().sampleImage,
                             alignment: Alignment.topCenter,
                             fit: BoxFit.cover,
                           ),
@@ -104,7 +82,7 @@ class _NewsCardState extends State<NewsCard> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                widget.category,
+                                category,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
@@ -129,17 +107,17 @@ class _NewsCardState extends State<NewsCard> {
                                   context: context,
                                   isScrollControlled: true,
                                   builder: (context) => DetailedNews(
-                                        title: widget.title,
-                                        author: widget.author,
-                                        source: widget.source,
-                                        category: widget.category,
-                                        url: widget.url,
-                                        description: widget.content,
+                                        title: title,
+                                        author: author,
+                                        source: source,
+                                        category: category,
+                                        url: url,
+                                        description: content,
                                       ) // The page to display as a bottom sheet
                                   );
                             },
                             child: Text(
-                              widget.title,
+                              title,
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
                                       fontSize: 14,
@@ -164,7 +142,7 @@ class _NewsCardState extends State<NewsCard> {
                                       maxHeight: 80,
                                     ),
                                     child: Text(
-                                      widget.author,
+                                      author,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -187,7 +165,7 @@ class _NewsCardState extends State<NewsCard> {
                                       maxHeight: 80,
                                     ),
                                     child: Text(
-                                      widget.source,
+                                      source,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.w900,
                                           color: Colors.grey,
@@ -200,11 +178,13 @@ class _NewsCardState extends State<NewsCard> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  _toggleBookmark();
-                                  _saveToHive();
+                                  ref.read(bookmarkedProvider.notifier).state =
+                                      (!isBookmarked.$1, index);
+                                  HiveMethods().saveToHive(title, author,
+                                      source, category, url, content);
                                 },
                                 child: Icon(
-                                  isBookmarked
+                                  isBookmarked.$1 && isBookmarked.$2 == index
                                       ? Icons.bookmark
                                       : Icons.bookmark_outline,
                                   size: 24.0,
