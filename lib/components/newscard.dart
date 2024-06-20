@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:newshub/components/textcomponents.dart';
+import 'package:hive/hive.dart';
 import 'package:newshub/pages/detailednews.dart';
 
 import '../constants/constants.dart';
+import '../persistance/newsmodel.dart';
 
 class NewsCard extends StatelessWidget {
   final String title;
@@ -21,7 +22,19 @@ class NewsCard extends StatelessWidget {
     required this.url,
     required this.description,
   });
-
+  void _saveToHive() async {
+    final newsBox = await Hive.openBox<NewsModel>('newsBox');
+    var newsModel = NewsModel(
+      title: title,
+      author: author,
+      source: source,
+      category: category,
+      url: url,
+      description: description,
+    );
+    await newsBox.add(newsModel);
+    Hive.close();
+  }
   @override
   Widget build(BuildContext context) {
     double padding = 10;
@@ -99,12 +112,17 @@ class NewsCard extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-
-                                builder: (context) =>
-                                     DetailedNews(title: title,author: author,source: source,category: category,url: url,description: description,) // The page to display as a bottom sheet
-                              );
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (context) => DetailedNews(
+                                        title: title,
+                                        author: author,
+                                        source: source,
+                                        category: category,
+                                        url: url,
+                                        description: description,
+                                      ) // The page to display as a bottom sheet
+                                  );
                             },
                             child: Text(
                               title,
@@ -166,10 +184,15 @@ class NewsCard extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const Icon(
-                                Icons.bookmark,
-                                size: 28.0,
-                                color: Colors.grey,
+                              GestureDetector(
+                                onTap: (){
+                                  _saveToHive();
+                                },
+                                child: const Icon(
+                                  Icons.bookmark,
+                                  size: 28.0,
+                                  color: Colors.grey,
+                                ),
                               )
                             ],
                           ),
