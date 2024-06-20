@@ -1,10 +1,10 @@
 import 'dart:core';
 
 import 'package:flutter/material.dart';
-import 'package:newshub/pages/categories.dart';
-import 'package:newshub/pages/homepage.dart';
+import 'package:newshub/pages/categories_list.dart';
+import 'package:newshub/pages/home_headlines.dart';
 import 'package:newshub/pages/profile.dart';
-import 'package:newshub/pages/saved.dart';
+import 'package:newshub/pages/saved_headlines.dart';
 
 class navBar extends StatefulWidget {
   //final Function()? onTap;

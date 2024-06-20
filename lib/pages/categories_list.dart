@@ -4,14 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:newshub/constants/initializers.dart';
 import '../components/options.dart';
 
-class Categories extends StatefulWidget {
+class Categories extends StatelessWidget {
   const Categories({super.key});
 
-  @override
-  State<Categories> createState() => _CategoriesState();
-}
-
-class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,16 +29,14 @@ class _CategoriesState extends State<Categories> {
                   height: 30,
                 ),
                 Expanded(
-                  child:
-                  ListView.builder(
+                  child: ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: Initializers().categories.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding:
-                        const EdgeInsets.symmetric(vertical: 20.0),
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: CategoryOption(
                             title: Initializers().categories[index],
                             iconName: Initializers().categoryIcons[index],

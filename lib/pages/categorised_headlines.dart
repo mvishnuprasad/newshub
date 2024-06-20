@@ -8,11 +8,12 @@ import '../methods/list_generate_methods.dart';
 import '../services/dataprovider.dart';
 
 class CategoryNews extends ConsumerWidget {
-  const CategoryNews({super.key});
+  final String title;
+  const CategoryNews(this.title, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userData = ref.watch(countryDataProvider);
+    final userData = ref.watch(categoryDataProvider);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
@@ -42,18 +43,7 @@ class CategoryNews extends ConsumerWidget {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          "Breaking News",
-                          style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
-                        ),
-                        const SizedBox(height: 20),
-                        const SizedBox(height: 20),
-                        Text(
-                          "Recommendations",
+                          "Latest in $title",
                           style: GoogleFonts.poppins(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

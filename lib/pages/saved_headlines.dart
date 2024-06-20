@@ -6,6 +6,8 @@ import '../persistance/newsmodel.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SavedArticles extends StatelessWidget {
+  const SavedArticles({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +48,8 @@ class SavedArticles extends StatelessWidget {
                             author: news.author,
                             source: news.source,
                             category: news.category,
-                            description: news.description),
+                            description: news.description,
+                            index: index),
                       );
                     },
                   ),

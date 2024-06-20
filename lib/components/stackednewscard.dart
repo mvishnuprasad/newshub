@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newshub/components/textcomponents.dart';
 import 'package:newshub/constants/url_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../pages/detailednews.dart';
+import '../pages/home_detailed.dart';
 
 class StackedNewsCard extends StatefulWidget {
   final String title;
@@ -91,13 +91,20 @@ class StackedNewsCardState extends State<StackedNewsCard> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.author,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 12),
-                          maxLines: 3,
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: width * 0.2,
+                           
+                          ),
+                          child: Text(
+                            widget.author,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 12),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 8.0),

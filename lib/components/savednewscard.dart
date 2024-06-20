@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newshub/pages/saved_detailnews.dart';
+import 'package:hive/hive.dart';
+
+import '../persistance/newsmodel.dart';
 
 class SavedNewsCard extends StatelessWidget {
   final String title;
@@ -8,6 +11,7 @@ class SavedNewsCard extends StatelessWidget {
   final String source;
   final String category;
   final String? description;
+  final int index;
   const SavedNewsCard({
     super.key,
     required this.title,
@@ -15,7 +19,14 @@ class SavedNewsCard extends StatelessWidget {
     required this.source,
     required this.category,
     required this.description,
+    required this.index,
   });
+  void delete(int index) async {
+    final newsBox = await Hive.openBox<NewsModel>('newsBox');
+
+    await newsBox.deleteAt(index);
+    Hive.close();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +74,15 @@ class SavedNewsCard extends StatelessWidget {
                                     color: Colors.grey,
                                     fontSize: 12),
                               ),
-                              const Icon(
-                                Icons.more_horiz,
-                                size: 32.0,
-                                color: Colors.grey,
+                              GestureDetector(
+                                onTap: () {
+                                  delete(index);
+                                },
+                                child: const Icon(
+                                  Icons.delete_outline,
+                                  size: 32.0,
+                                  color: Colors.grey,
+                                ),
                               )
                             ],
                           ),
@@ -82,13 +98,13 @@ class SavedNewsCard extends StatelessWidget {
                                   context: context,
                                   isScrollControlled: true,
                                   builder: (context) => SavedDetailNews(
-                                    title: title,
-                                    author: author,
-                                    source: source,
-                                    category: category,
-                                    description: description,
-                                  ) // The page to display as a bottom sheet
-                              );
+                                        title: title,
+                                        author: author,
+                                        source: source,
+                                        category: category,
+                                        description: description,
+                                      ) // The page to display as a bottom sheet
+                                  );
                             },
                             child: Text(
                               title,

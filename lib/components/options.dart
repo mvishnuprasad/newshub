@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newshub/pages/categorynews.dart';
+import 'package:newshub/pages/categorised_headlines.dart';
 
 class CategoryOption extends StatelessWidget {
   final String title;
@@ -46,7 +46,7 @@ class CategoryOption extends StatelessWidget {
               showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
-                  builder: (context) => const CategoryNews());
+                  builder: (context) => CategoryNews(title));
             },
             child: const Icon(
               Icons.chevron_right,

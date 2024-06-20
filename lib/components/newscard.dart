@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
-import 'package:newshub/pages/detailednews.dart';
+import 'package:newshub/pages/home_detailed.dart';
 import '../constants/url_constants.dart';
 import '../persistance/newsmodel.dart';
 
-class NewsCard extends StatelessWidget {
+class NewsCard extends StatefulWidget {
   final String title;
   final String author;
   final String source;
@@ -21,19 +21,34 @@ class NewsCard extends StatelessWidget {
     required this.url,
     required this.content,
   });
+
+  @override
+  State<NewsCard> createState() => _NewsCardState();
+}
+
+class _NewsCardState extends State<NewsCard> {
+  bool isBookmarked = false;
+
+  void _toggleBookmark() {
+    setState(() {
+      isBookmarked = !isBookmarked;
+    });
+  }
+
   void _saveToHive() async {
     final newsBox = await Hive.openBox<NewsModel>('newsBox');
     var newsModel = NewsModel(
-      title: title,
-      author: author,
-      source: source,
-      category: category,
-      url: url,
-      description: content,
+      title: widget.title,
+      author: widget.author,
+      source: widget.source,
+      category: widget.category,
+      url: widget.url,
+      description: widget.content,
     );
     await newsBox.add(newsModel);
     Hive.close();
   }
+
   @override
   Widget build(BuildContext context) {
     double padding = 10;
@@ -72,7 +87,7 @@ class NewsCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
                             // ,
-                            url ?? URLConstants().sampleImage,
+                            widget.url ?? URLConstants().sampleImage,
                             alignment: Alignment.topCenter,
                             fit: BoxFit.cover,
                           ),
@@ -89,7 +104,7 @@ class NewsCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                category,
+                                widget.category,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey,
@@ -97,7 +112,7 @@ class NewsCard extends StatelessWidget {
                               ),
                               const Icon(
                                 Icons.more_horiz,
-                                size: 32.0,
+                                size: 28.0,
                                 color: Colors.grey,
                               )
                             ],
@@ -105,8 +120,8 @@ class NewsCard extends StatelessWidget {
                         ),
                         ConstrainedBox(
                           constraints: BoxConstraints(
-                            maxWidth: width * 0.5,
-                            maxHeight: 80,
+                            maxWidth: width * 0.45,
+                            maxHeight: 70,
                           ),
                           child: GestureDetector(
                             onTap: () {
@@ -114,17 +129,17 @@ class NewsCard extends StatelessWidget {
                                   context: context,
                                   isScrollControlled: true,
                                   builder: (context) => DetailedNews(
-                                        title: title,
-                                        author: author,
-                                        source: source,
-                                        category: category,
-                                        url: url,
-                                        description: content,
+                                        title: widget.title,
+                                        author: widget.author,
+                                        source: widget.source,
+                                        category: widget.category,
+                                        url: widget.url,
+                                        description: widget.content,
                                       ) // The page to display as a bottom sheet
                                   );
                             },
                             child: Text(
-                              title,
+                              widget.title,
                               style: GoogleFonts.poppins(
                                   textStyle: const TextStyle(
                                       fontSize: 14,
@@ -149,7 +164,7 @@ class NewsCard extends StatelessWidget {
                                       maxHeight: 80,
                                     ),
                                     child: Text(
-                                      author,
+                                      widget.author,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black,
@@ -172,7 +187,7 @@ class NewsCard extends StatelessWidget {
                                       maxHeight: 80,
                                     ),
                                     child: Text(
-                                      source,
+                                      widget.source,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.w900,
                                           color: Colors.grey,
@@ -184,12 +199,15 @@ class NewsCard extends StatelessWidget {
                                 ],
                               ),
                               GestureDetector(
-                                onTap: (){
+                                onTap: () {
+                                  _toggleBookmark();
                                   _saveToHive();
                                 },
-                                child: const Icon(
-                                  Icons.bookmark,
-                                  size: 28.0,
+                                child: Icon(
+                                  isBookmarked
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_outline,
+                                  size: 24.0,
                                   color: Colors.grey,
                                 ),
                               )
