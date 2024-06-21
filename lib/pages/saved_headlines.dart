@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:newshub/components/savednewscard.dart';
+import 'package:newshub/services/dataprovider.dart';
 import '../persistance/newsmodel.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SavedArticles extends StatelessWidget {
+class SavedArticles extends ConsumerWidget {
   const SavedArticles({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+   // final savedArticles = ref.watch(savedNewsProvider);
     return Scaffold(
       body: FutureBuilder<Box<NewsModel>>(
         future: Hive.openBox<NewsModel>('newsBox'),

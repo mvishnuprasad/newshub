@@ -16,6 +16,7 @@ class NewsCard extends ConsumerWidget {
   final String? url;
   final String? content;
   final int index;
+  final bool saved;
   const NewsCard({
     super.key,
     required this.title,
@@ -25,13 +26,15 @@ class NewsCard extends ConsumerWidget {
     required this.url,
     required this.content,
     required this.index,
+    required this.saved,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    var savedNews = ref.watch(savedNewsProvider);
     double padding = 10;
     double width = MediaQuery.of(context).size.width;
-    final isBookmarked = ref.watch(bookmarkedProvider);
+    List<NewsModel> newsModels = [];
     return Center(
       child: Column(children: [
         Container(
@@ -176,20 +179,33 @@ class NewsCard extends ConsumerWidget {
                                   ),
                                 ],
                               ),
+
                               GestureDetector(
                                 onTap: () {
-                                  ref.read(bookmarkedProvider.notifier).state =
-                                      (!isBookmarked.$1, index);
-                                  HiveMethods().saveToHive(title, author,
-                                      source, category, url, content);
+                                  var newsModel = NewsModel(
+                                      title: title,
+                                      author: author,
+                                      source: source,
+                                      category: category);
+                                 // newsModels.add(newsModel);
+                                  HiveMethods().saveToHive(newsModel);
+                                  var savedNews = ref.watch(savedNewsProvider.notifier).state;
+                                  var savedTitle = ref.watch(savedTitleProvider.notifier).state;
+                                  bool titleExists = savedNews.any((item) => item.title == newsModel.title);
+                                  if (!titleExists) {
+                                    savedNews.add(newsModel);
+                                    savedTitle.add(title);
+                                  }else{
+
+                                  }
                                 },
-                                child: Icon(
-                                  isBookmarked.$1 && isBookmarked.$2 == index
-                                      ? Icons.bookmark
-                                      : Icons.bookmark_outline,
+                                child: Icon( saved
+                                          ? Icons.bookmark
+                                          : Icons.bookmark_outline,
                                   size: 24.0,
                                   color: Colors.grey,
                                 ),
+
                               )
                             ],
                           ),

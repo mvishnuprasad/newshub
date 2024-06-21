@@ -12,15 +12,16 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userData = ref.watch(countryDataProvider);
+    final newsData = ref.watch(countryProvider);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: userData.when(
+        body: newsData.when(
             data: (userData) {
               List<Article> articleList = userData.map((e) => e).toList();
+
               return SafeArea(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -100,7 +101,7 @@ class HomePage extends ConsumerWidget {
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
-                              child: newsCard(articleList, index),
+                              child: newsCard(articleList, index, ref.watch(savedTitleProvider).contains(articleList[index].title) ? true : false),
                             );
                           },
                         ),
@@ -113,6 +114,7 @@ class HomePage extends ConsumerWidget {
             error: (error, s) => Text(error.toString()),
             loading: () => const Center(
                   child: CircularProgressIndicator(),
+
                 )),
       ),
     );

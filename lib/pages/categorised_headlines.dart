@@ -13,7 +13,7 @@ class CategoryNews extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userData = ref.watch(categoryDataProvider);
+    final userData = ref.watch(categoryProvider);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
@@ -61,7 +61,7 @@ class CategoryNews extends ConsumerWidget {
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
-                              child: newsCard(articleList, index),
+                              child: newsCard(articleList, index, true),
                             );
                           },
                         ),

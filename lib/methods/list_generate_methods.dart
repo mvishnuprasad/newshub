@@ -20,7 +20,7 @@ List<Widget> generateStackedNewsCards(List<Article> articleList) {
                 : articleList[index].author,
             source: (articleList[index].source.name.isEmpty ||
                     articleList[index].source.name == "[Removed]")
-                ? "CNN"
+                ? "PBS News"
                 : articleList[index].source.name,
             category: (articleList[index].publishedAt.isEmpty ||
                     articleList[index].publishedAt == "[Removed]")
@@ -30,7 +30,7 @@ List<Widget> generateStackedNewsCards(List<Article> articleList) {
           ));
 }
 
-NewsCard newsCard(List<Article> articleList, int index) {
+NewsCard newsCard(List<Article> articleList, int index,bool saved) {
   return NewsCard(
     index : index,
     title: (articleList[index].title.isEmpty ||
@@ -54,6 +54,7 @@ NewsCard newsCard(List<Article> articleList, int index) {
             articleList[index].content == "[Removed]"
         ? TempNews().description
         : articleList[index].content,
+    saved: saved
 
   );
 }

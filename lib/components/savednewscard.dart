@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newshub/pages/saved_detailnews.dart';
 import 'package:hive/hive.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:newshub/persistance/hive_methods.dart';
+import 'package:newshub/services/dataprovider.dart';
 import '../persistance/newsmodel.dart';
 
-class SavedNewsCard extends StatelessWidget {
+class SavedNewsCard extends ConsumerWidget {
   final String title;
   final String author;
   final String source;
@@ -21,18 +23,13 @@ class SavedNewsCard extends StatelessWidget {
     required this.description,
     required this.index,
   });
-  void delete(int index) async {
-    final newsBox = await Hive.openBox<NewsModel>('newsBox');
-
-    await newsBox.deleteAt(index);
-    Hive.close();
-  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     double padding = 10;
     double width = MediaQuery.of(context).size.width;
-
+    final savedArticles = ref.watch(savedNewsProvider);
+    var savedTitle = ref.watch(savedTitleProvider);
     return Center(
       child: Column(children: [
         Container(
@@ -158,7 +155,12 @@ class SavedNewsCard extends StatelessWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  delete(index);
+                                  HiveMethods().delete(index);
+                                  bool titleExists = savedArticles.any((item) => item.title == title);
+                                  if (titleExists){
+                                    savedArticles.removeAt(index);
+                                    savedTitle.remove(title);
+                                  }
                                 },
                                 child: const Icon(
                                   Icons.delete_outline_outlined,
