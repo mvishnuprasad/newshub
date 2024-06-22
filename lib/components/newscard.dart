@@ -35,7 +35,8 @@ class NewsCard extends ConsumerWidget {
     var savedTitle = ref.watch(savedTitleProvider);
     double padding = 10;
     double width = MediaQuery.of(context).size.width;
-
+    var newsModel = NewsModel(
+        title: title, author: author, source: source, category: category);
     return Center(
       child: Column(children: [
         Container(
@@ -182,15 +183,8 @@ class NewsCard extends ConsumerWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  var newsModel = NewsModel(
-                                      title: title,
-                                      author: author,
-                                      source: source,
-                                      category: category);
-                                  // newsModels.add(newsModel);
                                   HiveMethods().saveToHive(newsModel);
-                                  // var savedNews = ref.watch(savedNewsProvider.notifier).state;
-                                  // var savedTitle = ref.watch(savedTitleProvider.notifier).state;
+
                                   bool titleExists = savedNews.any(
                                       (item) => item.title == newsModel.title);
                                   if (!titleExists) {

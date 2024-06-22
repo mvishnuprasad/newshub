@@ -41,9 +41,9 @@ class SavedArticles extends ConsumerWidget {
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: savedArticles.length,
+                    itemCount: savedNews.length,
                     itemBuilder: (context, index) {
-                      var news = savedArticles[index];
+                      var news = savedNews[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: SavedNewsCard(

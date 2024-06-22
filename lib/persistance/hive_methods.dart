@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'newsmodel.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,13 +8,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class HiveMethods {
   void saveToHive(NewsModel newsModel) async {
     final newsBox = await Hive.openBox<NewsModel>('newsBox');
-    await newsBox.put(newsModel.title, newsModel);
-    Hive.close();
+    if (newsBox.containsKey(newsModel.title) == false) {
+      await newsBox.put(newsModel.title, newsModel);
+      debugPrint('SAVED ${newsModel.title}');
+    } else {
+      await newsBox.delete(newsModel.title);
+      debugPrint('DELETE ${newsModel.title}');
+      Hive.close();
+    }
   }
 
-  void delete(int index) async {
+  void delete(NewsModel newsModel) async {
+    // final newsBox = await Hive.openBox<NewsModel>('newsBox');
+    // await newsBox.deleteAt(index);
+    // Hive.close();
     final newsBox = await Hive.openBox<NewsModel>('newsBox');
-    await newsBox.deleteAt(index);
-    Hive.close();
+    await newsBox.delete(newsModel.title);
+    debugPrint('DELETED ${newsModel.title}');
+    //await newsBox.close();
   }
 }

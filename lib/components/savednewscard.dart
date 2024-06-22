@@ -30,6 +30,11 @@ class SavedNewsCard extends ConsumerWidget {
     double width = MediaQuery.of(context).size.width;
     final savedArticles = ref.read(savedNewsProvider);
     var savedTitle = ref.watch(savedTitleProvider);
+    var newsModel = NewsModel(
+        title: title,
+        author: author,
+        source: source,
+        category: category);
     return Center(
       child: Column(children: [
         Container(
@@ -155,7 +160,7 @@ class SavedNewsCard extends ConsumerWidget {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  HiveMethods().delete(index);
+                                  HiveMethods().delete(newsModel);
                                   bool titleExists = savedArticles
                                       .any((item) => item.title == title);
                                   if (titleExists) {
