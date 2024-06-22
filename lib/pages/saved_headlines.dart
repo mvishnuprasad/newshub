@@ -12,7 +12,7 @@ class SavedArticles extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   // final savedArticles = ref.watch(savedNewsProvider);
+    final savedArticles = ref.watch(savedNewsProvider);
     return Scaffold(
       body: FutureBuilder<Box<NewsModel>>(
         future: Hive.openBox<NewsModel>('newsBox'),
@@ -41,9 +41,9 @@ class SavedArticles extends ConsumerWidget {
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: savedNews.length,
+                    itemCount: savedArticles.length,
                     itemBuilder: (context, index) {
-                      var news = savedNews[index];
+                      var news = savedArticles[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: SavedNewsCard(

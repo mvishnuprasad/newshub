@@ -32,9 +32,10 @@ class NewsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var savedNews = ref.watch(savedNewsProvider);
+    var savedTitle = ref.watch(savedTitleProvider);
     double padding = 10;
     double width = MediaQuery.of(context).size.width;
-    List<NewsModel> newsModels = [];
+
     return Center(
       child: Column(children: [
         Container(
@@ -179,7 +180,6 @@ class NewsCard extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-
                               GestureDetector(
                                 onTap: () {
                                   var newsModel = NewsModel(
@@ -187,25 +187,24 @@ class NewsCard extends ConsumerWidget {
                                       author: author,
                                       source: source,
                                       category: category);
-                                 // newsModels.add(newsModel);
+                                  // newsModels.add(newsModel);
                                   HiveMethods().saveToHive(newsModel);
-                                  var savedNews = ref.watch(savedNewsProvider.notifier).state;
-                                  var savedTitle = ref.watch(savedTitleProvider.notifier).state;
-                                  bool titleExists = savedNews.any((item) => item.title == newsModel.title);
+                                  // var savedNews = ref.watch(savedNewsProvider.notifier).state;
+                                  // var savedTitle = ref.watch(savedTitleProvider.notifier).state;
+                                  bool titleExists = savedNews.any(
+                                      (item) => item.title == newsModel.title);
                                   if (!titleExists) {
                                     savedNews.add(newsModel);
                                     savedTitle.add(title);
-                                  }else{
-
-                                  }
+                                  } else {}
                                 },
-                                child: Icon( saved
-                                          ? Icons.bookmark
-                                          : Icons.bookmark_outline,
+                                child: Icon(
+                                  saved
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_outline,
                                   size: 24.0,
                                   color: Colors.grey,
                                 ),
-
                               )
                             ],
                           ),

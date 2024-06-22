@@ -28,7 +28,7 @@ class SavedNewsCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     double padding = 10;
     double width = MediaQuery.of(context).size.width;
-    final savedArticles = ref.watch(savedNewsProvider);
+    final savedArticles = ref.read(savedNewsProvider);
     var savedTitle = ref.watch(savedTitleProvider);
     return Center(
       child: Column(children: [
@@ -156,10 +156,16 @@ class SavedNewsCard extends ConsumerWidget {
                               GestureDetector(
                                 onTap: () {
                                   HiveMethods().delete(index);
-                                  bool titleExists = savedArticles.any((item) => item.title == title);
-                                  if (titleExists){
+                                  bool titleExists = savedArticles
+                                      .any((item) => item.title == title);
+                                  if (titleExists) {
                                     savedArticles.removeAt(index);
                                     savedTitle.remove(title);
+                                    ref.read(savedNewsProvider.notifier).update(
+                                        (state) => savedArticles.toList());
+                                    ref
+                                        .read(savedTitleProvider.notifier)
+                                        .update((state) => savedTitle.toList());
                                   }
                                 },
                                 child: const Icon(
