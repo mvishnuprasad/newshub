@@ -33,14 +33,16 @@ class Categories extends StatelessWidget {
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: Initializers().categories.length,
+                    itemCount: Initializers.categories.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: CategoryOption(
-                            title: Initializers().categories[index],
-                            iconName: Initializers().categoryIcons[index],
-                            color: AppColors.primaryColor),
+                            title: Initializers.categories[index],
+                            iconName: Initializers.categoryIcons[index],
+                            color: AppColors.primaryColor,
+                          provider: Initializers.providers[index],
+                        ),
                       );
                     },
                   ),

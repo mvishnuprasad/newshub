@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:newshub/constants/initializers.dart';
 import 'package:newshub/pages/categorised_headlines.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../models/newsapimodel.dart';
 import 'icons.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 class CategoryOption extends StatelessWidget {
   final String title;
   final IconData iconName;
   final Color color;
+  final FutureProvider<List<Article>> provider;
 
   const CategoryOption(
       {super.key,
       required this.title,
       required this.iconName,
-      required this.color});
+      required this.color, required this.provider});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class CategoryOption extends StatelessWidget {
               showModalBottomSheet(
                   context: context,
                   isScrollControlled: true,
-                  builder: (context) => CategoryNews(title));
+                  builder: (context) => CategoryNews(title, provider));
             },
             child: const Icon(
               Icons.chevron_right,
@@ -105,7 +107,13 @@ class ProfileOption extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ProfileIcon(icons: iconName, color: title == "Logout" ? Colors.red : AppColors.primaryAccentColor, logout: title == "Logout" ? true: false,),
+                  ProfileIcon(
+                    icons: iconName,
+                    color: title == "Logout"
+                        ? Colors.red
+                        : AppColors.primaryAccentColor,
+                    logout: title == "Logout" ? true : false,
+                  ),
                   const SizedBox(
                     width: 5,
                   ),
@@ -116,25 +124,29 @@ class ProfileOption extends StatelessWidget {
                       Text(
                         title,
                         style: GoogleFonts.poppins(
-                            textStyle:  TextStyle(
-                                color: title == "Logout" ? Colors.red : AppColors.primaryColor,
+                            textStyle: TextStyle(
+                                color: title == "Logout"
+                                    ? Colors.red
+                                    : AppColors.primaryColor,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold)),
                       ),
-                      Text(
-                        hintText,
-                        style: TextStyle(
-                            color: title == "Logout" ? Colors.red : AppColors.secondaryAccentColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold)),
-
+                      Text(hintText,
+                          style: TextStyle(
+                              color: title == "Logout"
+                                  ? Colors.red
+                                  : AppColors.secondaryAccentColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ],
               ),
               Icon(
                 Icons.chevron_right,
-                color: title == "Logout" ? Colors.red : AppColors.secondaryAccentColor,
+                color: title == "Logout"
+                    ? Colors.red
+                    : AppColors.secondaryAccentColor,
               )
             ],
           ),

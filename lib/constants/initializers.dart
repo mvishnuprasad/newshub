@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/newsapimodel.dart';
+import '../services/dataprovider.dart';
 
 class TempNews {
   String title =
@@ -22,7 +23,7 @@ class TempNews {
 }
 
 class Initializers {
-  final List<Article> emptyList = [
+  static List<Article> emptyList = [
     Article(
         source: Source(id: "id", name: "name"),
         author: "author",
@@ -33,7 +34,7 @@ class Initializers {
         publishedAt: "publishedAt",
         content: "content")
   ];
-  final List<String> categories = [
+  static List<String> categories = [
     'Business',
     'Entertainment',
     'General',
@@ -42,7 +43,16 @@ class Initializers {
     'Sports',
     'Technology',
   ];
-  final List<IconData> categoryIcons = [
+  static List<FutureProvider<List<Article>>> providers = [
+    businessProvider,
+    entertainmentProvider,
+    generalProvider,
+    healthProvider,
+    scienceProvider,
+    sportsProvider,
+    technologyProvider,
+  ];
+  static List<IconData> categoryIcons = [
     Icons.business_center_outlined,
     Icons.movie_outlined,
     Icons.all_inclusive_outlined,

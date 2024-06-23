@@ -8,11 +8,12 @@ import '../services/dataprovider.dart';
 
 class CategoryNews extends ConsumerWidget {
   final String title;
-  const CategoryNews(this.title, {super.key});
+  final FutureProvider<List<Article>> provider;
+  const CategoryNews(this.title, this.provider, {super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final userData = ref.watch(categoryProvider);
+    final userData = ref.watch(provider);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
@@ -55,7 +56,7 @@ class CategoryNews extends ConsumerWidget {
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 5,
+                          itemCount: articleList.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding:

@@ -8,9 +8,20 @@ final countryProvider = FutureProvider<List<Article>>((ref) =>
     NewsAPIService(('country', 'us'), apiUrl: URLConstants().topHeadlines)
         .getNewsData());
 
-final categoryProvider = FutureProvider<List<Article>>((ref) =>
-    NewsAPIService(('category', 'sports'), apiUrl: URLConstants().topHeadlines)
-        .getNewsData());
+FutureProvider<List<Article>> categoryProvider(String category) {
+  return FutureProvider<List<Article>>((ref) =>
+      NewsAPIService(('category', category), apiUrl: URLConstants().topHeadlines)
+          .getNewsData());
+}
+
+
+final sportsProvider = categoryProvider('sports');
+final entertainmentProvider = categoryProvider('entertainment');
+final generalProvider = categoryProvider('general');
+final healthProvider = categoryProvider('health');
+final scienceProvider = categoryProvider('science');
+final technologyProvider = categoryProvider('technology');
+final businessProvider = categoryProvider('business');
 
 var savedNewsProvider = StateProvider<List<NewsModel>>((ref) => []);
 var savedTitleProvider = StateProvider<List<String>>((ref) => []);

@@ -24,11 +24,11 @@ class NewsAPIService {
         return articles;
       } else {
         debugPrint("${response.statusCode}");
-        return Initializers().emptyList;
+        return Initializers.emptyList;
       }
     } catch (e) {
       debugPrint(e.toString());
-      return Initializers().emptyList;
+      return Initializers.emptyList;
     }
   }
 }
