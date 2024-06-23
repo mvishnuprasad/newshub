@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:newshub/constants/url_constants.dart';
 import '../constants/api_constants.dart';
 import '../constants/initializers.dart';
@@ -22,11 +23,11 @@ class NewsAPIService {
             .toList();
         return articles;
       } else {
-        print(response.statusCode);
+        debugPrint("${response.statusCode}");
         return Initializers().emptyList;
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
       return Initializers().emptyList;
     }
   }

@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'newsmodel.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HiveMethods {
   void saveToHive(NewsModel newsModel) async {

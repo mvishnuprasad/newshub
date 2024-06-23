@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newshub/constants/initializers.dart';
 import 'package:newshub/models/listmodel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/options.dart';
@@ -25,37 +26,16 @@ class UserProfile extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.vertical,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Icon(
-                              Icons.arrow_back,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          const Text(
-                            "Profile",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
-                                color: Colors.black),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                 CircleAvatar(
+                const Padding(
+                    padding: EdgeInsets.only(left: 30.0, top: 10, bottom: 20),
+                    child: Text(
+                      "Profile",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Colors.black),
+                    )),
+                CircleAvatar(
                   radius: 80,
                   backgroundImage: NetworkImage(URLConstants().profilePic),
                 ),
@@ -65,21 +45,28 @@ class UserProfile extends StatelessWidget {
                 Center(
                   child: Text(
                     "Michael B",
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.poppins(
                         textStyle: const TextStyle(
-                            fontSize: 36, fontWeight: FontWeight.normal)),
+                            fontSize: 21, fontWeight: FontWeight.bold)),
                   ),
                 ),
                 Center(
                   child: SizedBox(
-                    width: 250,
+                    width: 220,
                     height: 30,
-                    child: Center(
-                      child: Text(
-                        "bmichael878@reddifmail.com",
-                        style: GoogleFonts.roboto(
-                            textStyle: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w500)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: AppColors.primaryAccentColor,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Center(
+                        child: Text(
+                          "bmichael878@reddifmail.com",
+                          style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                  color: AppColors.primaryColor,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600)),
+                        ),
                       ),
                     ),
                   ),

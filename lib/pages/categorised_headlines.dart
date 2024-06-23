@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newshub/components/icons.dart';
 import 'package:newshub/models/newsapimodel.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import '../methods/list_generate_methods.dart';
 import '../services/dataprovider.dart';
 
@@ -28,14 +27,14 @@ class CategoryNews extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconsDecorated(icons: Icons.menu_rounded),
                             Row(
                               children: [
                                 IconsDecorated(icons: Icons.search),
-                                const SizedBox(width: 10),
+                                SizedBox(width: 10),
                                 IconsDecorated(icons: Icons.notifications),
                               ],
                             ),

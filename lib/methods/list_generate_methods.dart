@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../components/newscard.dart';
 import '../components/stackednewscard.dart';
 import '../constants/initializers.dart';
-import '../constants/url_constants.dart';
 import '../models/newsapimodel.dart';
 
 List<Widget> generateStackedNewsCards(List<Article> articleList) {

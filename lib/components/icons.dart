@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:newshub/constants/initializers.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class IconsDecorated extends StatelessWidget {
-  IconData icons;
-  IconsDecorated({required this.icons, super.key});
+  final IconData icons;
+  const IconsDecorated({required this.icons, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppColors.primaryColor
-      ),
+      decoration:
+          BoxDecoration(shape: BoxShape.circle, color: AppColors.primaryColor),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Icon(
@@ -25,56 +22,30 @@ class IconsDecorated extends StatelessWidget {
   }
 }
 
-class CustomNavBarItem extends StatelessWidget {
-  final IconData iconName;
-  final bool isActive;
-  final String title;
-  const CustomNavBarItem(
-      {super.key,
-      required this.iconName,
-      required this.isActive,
-      required this.title});
+class ProfileIcon extends StatelessWidget {
+  final IconData icons;
+  final Color color;
+  final bool logout;
+  const ProfileIcon({required this.icons, required this.color, super.key, required this.logout});
 
   @override
   Widget build(BuildContext context) {
-    return isActive
-        ? Container(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            width: isActive ? 100.0 : 40,
-            height: 40.0,
-            decoration: BoxDecoration(
-              color: isActive ? AppColors.highLight : Colors.transparent,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(40.0),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  iconName,
-                  size: 24,
-                  color: AppColors.primaryColor,
-                ),
-                SizedBox(
-                  width: isActive ? 5 : 0,
-                ),
-                Text(
-                  isActive ? title : "",
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                          color: AppColors.primaryColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold)),
-                )
-              ],
-            ),
-          )
-        : Icon(
-            iconName,
-            size: 24,
-            color: AppColors.highLight,
-          );
+    return Container(
+      height: 50,
+      width: 50,
+      margin: const EdgeInsets.all(10.0),
+      decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+          color: color),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Icon(
+          icons,
+          size: 24.0,
+          color: logout ? AppColors.highLight : AppColors.primaryColor,
+        ),
+      ),
+    );
   }
 }

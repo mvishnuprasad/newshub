@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:newshub/constants/url_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../components/icons.dart';
 import '../constants/initializers.dart';
@@ -39,8 +38,8 @@ class DetailedNews extends StatelessWidget {
                 width: width,
                 fit: BoxFit.cover,
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 35.0, left: 20, right: 20),
+              const Padding(
+                padding: EdgeInsets.only(top: 35.0, left: 20, right: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -80,7 +79,7 @@ class DetailedNews extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: EdgeInsets.symmetric(vertical: 20),
+                            padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:newshub/pages/home_detailed.dart';
 import 'package:newshub/persistance/hive_methods.dart';
 import '../constants/url_constants.dart';

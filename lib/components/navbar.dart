@@ -7,7 +7,7 @@ import 'package:newshub/pages/home_headlines.dart';
 import 'package:newshub/pages/profile.dart';
 import 'package:newshub/pages/saved_headlines.dart';
 
-import 'icons.dart';
+import 'navbar_item.dart';
 
 class NavBar extends StatefulWidget {
   //final Function()? onTap;
@@ -60,18 +60,17 @@ class NavBarState extends State<NavBar> {
         body: _widgetOptions.elementAt(selectedIndex),
         bottomNavigationBar: Container(
           color: Colors.transparent,
+          padding: const EdgeInsets.only(bottom: 0, left: 10, right: 10),
           margin: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
-          height: 80,
+          height: 75,
           child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(50)),
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
             child: BottomNavigationBar(
               elevation: 0,
               type: BottomNavigationBarType.shifting,
               backgroundColor: AppColors.background,
               showSelectedLabels: false,
               showUnselectedLabels: false,
-              selectedItemColor: AppColors.primaryColor,
-              unselectedItemColor: Colors.grey,
               items: [
                 bottomNavigationBarItem("Home", 0),
                 bottomNavigationBarItem("Topics", 1),

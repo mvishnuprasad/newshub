@@ -43,7 +43,7 @@ class SavedDetailNews extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconsDecorated(icons: Icons.volume_down),

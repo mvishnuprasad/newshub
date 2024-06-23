@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newshub/pages/saved_detailnews.dart';
-import 'package:hive/hive.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newshub/persistance/hive_methods.dart';
 import 'package:newshub/services/dataprovider.dart';

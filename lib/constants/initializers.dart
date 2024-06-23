@@ -61,6 +61,8 @@ class Initializers {
 
 class AppColors {
   static Color primaryColor = const Color(0xff3c595d);
+  static Color primaryAccentColor = const Color(0xffc0dbde);
+  static Color secondaryAccentColor = const Color(0xff538388);
   static Color background = const Color(0xff101212);
   static Color highLight = const Color(0xfffeffff);
 }

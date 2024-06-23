@@ -28,14 +28,14 @@ class HomePage extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             IconsDecorated(icons: Icons.menu_rounded),
                             Row(
                               children: [
                                 IconsDecorated(icons: Icons.search),
-                                const SizedBox(width: 10),
+                                SizedBox(width: 10),
                                 IconsDecorated(icons: Icons.notifications),
                               ],
                             ),

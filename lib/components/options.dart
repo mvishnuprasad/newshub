@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:newshub/constants/initializers.dart';
 import 'package:newshub/pages/categorised_headlines.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'icons.dart';
 
 class CategoryOption extends StatelessWidget {
   final String title;
@@ -102,13 +105,9 @@ class ProfileOption extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(
-                    iconName,
-                    color: title == "Logout" ? Colors.red : Colors.black,
-                    size: 24,
-                  ),
+                  ProfileIcon(icons: iconName, color: title == "Logout" ? Colors.red : AppColors.primaryAccentColor, logout: title == "Logout" ? true: false,),
                   const SizedBox(
-                    width: 20,
+                    width: 5,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,26 +115,26 @@ class ProfileOption extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: title == "Logout" ? Colors.red : Colors.black,
-                        ),
+                        style: GoogleFonts.poppins(
+                            textStyle:  TextStyle(
+                                color: title == "Logout" ? Colors.red : AppColors.primaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold)),
                       ),
                       Text(
                         hintText,
                         style: TextStyle(
-                          fontSize: 12,
-                          color: title == "Logout" ? Colors.red : Colors.black,
-                        ),
-                      )
+                            color: title == "Logout" ? Colors.red : AppColors.secondaryAccentColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold)),
+
                     ],
                   ),
                 ],
               ),
               Icon(
                 Icons.chevron_right,
-                color: title == "Logout" ? Colors.red : Colors.grey,
+                color: title == "Logout" ? Colors.red : AppColors.secondaryAccentColor,
               )
             ],
           ),
