@@ -9,10 +9,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SavedArticles extends ConsumerWidget {
   const SavedArticles({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final savedArticles = ref.watch(savedNewsProvider);
     return Scaffold(
       body: FutureBuilder<Box<NewsModel>>(
         future: Hive.openBox<NewsModel>('newsBox'),

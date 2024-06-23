@@ -31,10 +31,7 @@ class SavedNewsCard extends ConsumerWidget {
     final savedArticles = ref.read(savedNewsProvider);
     var savedTitle = ref.watch(savedTitleProvider);
     var newsModel = NewsModel(
-        title: title,
-        author: author,
-        source: source,
-        category: category);
+        title: title, author: author, source: source, category: category);
     return Center(
       child: Column(children: [
         Container(

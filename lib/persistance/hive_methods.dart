@@ -19,12 +19,8 @@ class HiveMethods {
   }
 
   void delete(NewsModel newsModel) async {
-    // final newsBox = await Hive.openBox<NewsModel>('newsBox');
-    // await newsBox.deleteAt(index);
-    // Hive.close();
     final newsBox = await Hive.openBox<NewsModel>('newsBox');
     await newsBox.delete(newsModel.title);
     debugPrint('DELETED ${newsModel.title}');
-    //await newsBox.close();
   }
 }

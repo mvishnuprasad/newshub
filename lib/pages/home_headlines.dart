@@ -13,7 +13,6 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final newsData = ref.watch(countryProvider);
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -21,7 +20,6 @@ class HomePage extends ConsumerWidget {
         body: newsData.when(
             data: (userData) {
               List<Article> articleList = userData.map((e) => e).toList();
-
               return SafeArea(
                 child: SingleChildScrollView(
                   child: Padding(
@@ -96,12 +94,19 @@ class HomePage extends ConsumerWidget {
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 5,
+                          itemCount: articleList.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding:
                                   const EdgeInsets.symmetric(vertical: 8.0),
-                              child: newsCard(articleList, index, ref.watch(savedTitleProvider).contains(articleList[index].title) ? true : false),
+                              child: newsCard(
+                                  articleList,
+                                  index,
+                                  ref
+                                          .watch(savedTitleProvider)
+                                          .contains(articleList[index].title)
+                                      ? true
+                                      : false),
                             );
                           },
                         ),
@@ -114,7 +119,6 @@ class HomePage extends ConsumerWidget {
             error: (error, s) => Text(error.toString()),
             loading: () => const Center(
                   child: CircularProgressIndicator(),
-
                 )),
       ),
     );

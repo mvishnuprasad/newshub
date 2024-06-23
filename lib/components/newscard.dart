@@ -31,7 +31,6 @@ class NewsCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var savedNews = ref.watch(savedNewsProvider);
     var savedTitle = ref.watch(savedTitleProvider);
     double padding = 10;
     double width = MediaQuery.of(context).size.width;
@@ -184,16 +183,25 @@ class NewsCard extends ConsumerWidget {
                               GestureDetector(
                                 onTap: () {
                                   HiveMethods().saveToHive(newsModel);
+                                  bool titleExists = ref
+                                      .read(savedTitleProvider.notifier)
+                                      .state
+                                      .any((item) => item == newsModel.title);
 
-                                  bool titleExists = savedNews.any(
-                                      (item) => item.title == newsModel.title);
                                   if (!titleExists) {
-                                    savedNews.add(newsModel);
                                     savedTitle.add(title);
-                                  } else {}
+                                  } else {
+                                    savedTitle.remove(title);
+                                  }
+                                  ref
+                                      .read(savedTitleProvider.notifier)
+                                      .update((state) => savedTitle.toList());
                                 },
                                 child: Icon(
-                                  saved
+                                  ref
+                                          .watch(savedTitleProvider.notifier)
+                                          .state
+                                          .contains(title)
                                       ? Icons.bookmark
                                       : Icons.bookmark_outline,
                                   size: 24.0,
