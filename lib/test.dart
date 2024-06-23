@@ -17,4 +17,3 @@
 // final categoryDataProvider = FutureProvider<List<Article>>((ref) async {
 //   return ref.watch(categoryProvider).getNewsData();
 // });
-

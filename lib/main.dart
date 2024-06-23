@@ -26,7 +26,7 @@ class NewsHub extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: navBar(),
+        bottomNavigationBar: NavBar(),
       ),
     );
   }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +20,6 @@ class TempNews {
       "dollars on US products. In July of that year, Saudi agreed to invest oil dollars in US Treasuries (this was kept confidential until 2016),"
       " said Donovan in the blog post.";
 }
-
 
 class Initializers {
   final List<Article> emptyList = [
@@ -53,5 +51,16 @@ class Initializers {
     Icons.sports_baseball_outlined,
     Icons.laptop_outlined,
   ];
+  static Map<IconData, IconData> iconNames = {
+    Icons.home_rounded: Icons.home_outlined,
+    Icons.category_rounded: Icons.category_outlined,
+    Icons.bookmark_rounded: Icons.bookmark_outline,
+    Icons.person_rounded: Icons.person_outlined,
+  };
+}
 
+class AppColors {
+  static Color primaryColor = const Color(0xff3c595d);
+  static Color background = const Color(0xff101212);
+  static Color highLight = const Color(0xfffeffff);
 }
