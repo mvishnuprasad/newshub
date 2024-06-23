@@ -27,6 +27,7 @@ class CategoryOption extends StatelessWidget {
                 Icon(
                   iconName,
                   color: color,
+                  size: 24,
                 ),
                 const SizedBox(
                   width: 10,

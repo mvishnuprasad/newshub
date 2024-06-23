@@ -39,7 +39,7 @@ class NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     BottomNavigationBarItem bottomNavigationBarItem(String title, int index) {
       return BottomNavigationBarItem(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.primaryColor,
         label: '',
         activeIcon: CustomNavBarItem(
           iconName: Initializers.iconNames.keys.toList()[index],

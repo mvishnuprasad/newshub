@@ -40,7 +40,7 @@ class Categories extends StatelessWidget {
                         child: CategoryOption(
                             title: Initializers().categories[index],
                             iconName: Initializers().categoryIcons[index],
-                            color: Colors.blueAccent),
+                            color: AppColors.primaryColor),
                       );
                     },
                   ),

@@ -11,14 +11,14 @@ class IconsDecorated extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.grey[100],
+        color: AppColors.primaryColor
       ),
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.all(8.0),
         child: Icon(
           icons,
           size: 24.0,
-          color: Colors.black,
+          color: AppColors.highLight,
         ),
       ),
     );
