@@ -61,19 +61,12 @@ class HomePage extends ConsumerWidget {
                             leading: const Icon(Icons.search),
                             hintText: "Search",
                             onSubmitted: (String value) async {
-                              newsData =
-                                  await ref.refresh(searchProvider(value));
-                              //print(ref.refresh(searchProvider(value)));
 
-                              newsData.when(data: (userData) {
-                                List<Article> articleList =
-                                    userData.map((e) => e).toList();
-                                print(userData.length);
-                              }, error: (Object error, StackTrace stackTrace) {
-                                print("error");
-                              }, loading: () {
-                                print("loading");
-                              });
+                              ref.read(searchProvider(value));
+                              var states = ref.read(countryProvider);
+                              states = ref.watch(searchProvider(value));
+
+
                             },
                           ),
                         ),

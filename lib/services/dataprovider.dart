@@ -30,3 +30,5 @@ final businessProvider = categoryProvider('business');
 var savedNewsProvider = StateProvider<List<NewsModel>>((ref) => []);
 var savedTitleProvider = StateProvider<List<String>>((ref) => []);
 var headLinesProvider = StateProvider<List<Article>>((ref) => []);
+
+
