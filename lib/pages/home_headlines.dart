@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newshub/components/icons.dart';
+import 'package:newshub/constants/initializers.dart';
 import 'package:newshub/models/newsapimodel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -12,7 +14,8 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final newsData = ref.watch(countryProvider);
+    var newsData = ref.watch(countryProvider);
+    double width = MediaQuery.of(context).size.width;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -28,18 +31,61 @@ class HomePage extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IconsDecorated(icons: Icons.menu_rounded),
-                            Row(
-                              children: [
-                                IconsDecorated(icons: Icons.search),
-                                SizedBox(width: 10),
-                                IconsDecorated(icons: Icons.notifications),
-                              ],
+                        SizedBox(
+                          width: width,
+                          child: ExpansionTile(
+                            tilePadding:
+                                const EdgeInsets.symmetric(horizontal: 5),
+                            shape: const Border(),
+                            leading:
+                                const IconsDecorated(icons: Icons.menu_rounded),
+                            title: const Text(""),
+                            trailing: SizedBox(
+                              width: width * 0.23,
+                              child: const Row(
+                                children: [
+                                  IconsDecorated(
+                                    icons: Icons.search,
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  IconsDecorated(icons: Icons.notifications),
+                                ],
+                              ),
                             ),
-                          ],
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, bottom: 15, left: 5, right: 5),
+                                child: SearchBar(
+                                  backgroundColor:
+                                      WidgetStateProperty.all<Color>(
+                                          AppColors.highLight),
+                                  hintStyle: WidgetStateProperty.all<TextStyle>(
+                                      GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600))),
+                                  leading: const Icon(Icons.search),
+                                  hintText: "Search",
+                                  onSubmitted: (String value) async {
+                                    newsData =
+                                        await ref.refresh(searchProvider(value));
+                                    //print(ref.refresh(searchProvider(value)));
+
+                                    newsData.when(
+                                        data: (userData) {
+                                          List<Article> articleList =
+                                              userData.map((e) => e).toList();
+                                          print(userData.length);
+                                        },
+                                        error: (Object error,
+                                            StackTrace stackTrace) {print("error");},
+                                        loading: () {print("loading");});
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 20),
                         Text(

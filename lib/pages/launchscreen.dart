@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newshub/constants/initializers.dart';
 import 'package:newshub/main.dart';
 import '../models/newsapimodel.dart';
 
@@ -36,7 +37,7 @@ class LaunchScreenState extends State<LaunchScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.white70,
+        backgroundColor: AppColors.highLight,
         body: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -44,13 +45,13 @@ class LaunchScreenState extends State<LaunchScreen> {
               Icon(
                 Icons.book_outlined,
                 size: 32.0,
-                color: Colors.grey[800],
+                color: AppColors.primaryColor,
               ),
-              const Text(
+              Text(
                 "NewsHub",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    color: AppColors.secondaryAccentColor,
                     fontSize: 25),
               ),
             ],

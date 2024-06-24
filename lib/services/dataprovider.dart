@@ -14,7 +14,11 @@ FutureProvider<List<Article>> categoryProvider(String category) {
           .getNewsData());
 }
 
-
+FutureProvider<List<Article>> searchProvider(String searchTerm) {
+  return FutureProvider<List<Article>>((ref) =>
+      NewsAPIService(('q', searchTerm), apiUrl: URLConstants().everyThing)
+          .getNewsData());
+}
 final sportsProvider = categoryProvider('sports');
 final entertainmentProvider = categoryProvider('entertainment');
 final generalProvider = categoryProvider('general');
@@ -25,3 +29,4 @@ final businessProvider = categoryProvider('business');
 
 var savedNewsProvider = StateProvider<List<NewsModel>>((ref) => []);
 var savedTitleProvider = StateProvider<List<String>>((ref) => []);
+var headLinesProvider = StateProvider<List<Article>>((ref) => []);
