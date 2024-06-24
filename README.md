@@ -15,6 +15,7 @@ Home Page.
 Detailed news page.
 Add to favorites.
 News by category.
+Search Bar
 
 More features will be added later
 
