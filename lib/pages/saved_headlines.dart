@@ -34,6 +34,20 @@ class SavedArticles extends ConsumerWidget {
                     maxLines: 3,
                   ),
                   const SizedBox(height: 40),
+                  Visibility(
+                    visible: savedNews.isEmpty,
+                    child: Center(
+                      child: Text(
+                        "No saved Articles",
+                        style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                      ),
+                    ),
+                  ),
                   ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
