@@ -23,42 +23,57 @@ class SavedArticles extends ConsumerWidget {
             return SafeArea(
                 child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Saved Articles",
+              padding: const EdgeInsets.only(top: 80, left: 20, right: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Saved Articles",
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
+                  Visibility(visible: savedNews.isEmpty,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 250.0),
+                          child: Text(
+                            "No saved articles",
                             style: GoogleFonts.poppins(
-                              fontSize: 20,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
                           ),
-                          const SizedBox(height: 40),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: savedNews.length,
-                            itemBuilder: (context, index) {
-                              var news = savedNews[index];
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                child: SavedNewsCard(
-                                    title: news.title,
-                                    author: news.author,
-                                    source: news.source,
-                                    category: news.category,
-                                    description: news.description,
-                                    index: index),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    )));
+                        ),
+                      ),),
+                  const SizedBox(height: 40),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: savedNews.length,
+                    itemBuilder: (context, index) {
+                      var news = savedNews[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: SavedNewsCard(
+                            title: news.title,
+                            author: news.author,
+                            source: news.source,
+                            category: news.category,
+                            description: news.description,
+                            index: index),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            )));
           } else {
             return const Center(child: CircularProgressIndicator());
           }

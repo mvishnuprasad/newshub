@@ -59,6 +59,7 @@ dev_dependencies:
   hive_generator:
   build_runner:
   flutter_launcher_icons:
+  shared_preferences:
 
 
 

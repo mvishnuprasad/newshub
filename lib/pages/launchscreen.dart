@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:newshub/constants/initializers.dart';
 import 'package:newshub/main.dart';
-import 'package:newshub/pages/landing.dart';
+import 'package:newshub/pages/landingpage.dart';
 import '../models/newsapimodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});
@@ -24,13 +25,19 @@ class LaunchScreen extends StatefulWidget {
 
 class LaunchScreenState extends State<LaunchScreen> {
   List<Article> imageURLList = [];
+  int? isFirstInstall;
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(milliseconds: 3000), () {
+    Future.delayed(const Duration(milliseconds: 3000), () async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      isFirstInstall = prefs.getInt("first");
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) =>  LandingPage()));
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  isFirstInstall == 1 || isFirstInstall == null ? LandingPage() : const NewsHub()));
     });
   }
 

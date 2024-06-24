@@ -3,7 +3,7 @@ import 'package:newshub/constants/initializers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../constants/url_constants.dart';
 import '../main.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   runApp(MaterialApp(
     home: LandingPage(),
@@ -88,8 +88,10 @@ class Screen extends StatelessWidget {
   final bool isVisible;
   const Screen({super.key, required this.index, required this.isVisible});
 
+
   @override
   Widget build(BuildContext context) {
+
     return Container(
       decoration: BoxDecoration(
         color: AppColors.highLight,
@@ -129,7 +131,9 @@ class Screen extends StatelessWidget {
                   visible: isVisible,
                   child: FloatingActionButton(
                     backgroundColor: AppColors.primaryAccentColor,
-                    onPressed: () {
+                    onPressed: () async {
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      await prefs.setInt("first", 0);
                       Navigator.pushReplacement(
                           context, MaterialPageRoute(builder: (context) => const NewsHub()));
                     },
