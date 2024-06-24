@@ -67,6 +67,12 @@ class Initializers {
     Icons.bookmark_rounded: Icons.bookmark_outline,
     Icons.person_rounded: Icons.person_outlined,
   };
+  static Map<String, String> headlines = {
+    "Stay Informed, Stay Ahead!": "Your daily digest of breaking news and trending stories delivered straight to your device.",
+    "Explore News That Matters": "Discover a curated selection of news articles tailored to your interests and preferences.",
+    "Never Miss a Beat!": "Get real-time updates on events happening around the globe with our intuitive news app."
+  };
+
 }
 
 class AppColors {

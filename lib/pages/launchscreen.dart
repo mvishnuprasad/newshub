@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newshub/constants/initializers.dart';
 import 'package:newshub/main.dart';
+import 'package:newshub/pages/landing.dart';
 import '../models/newsapimodel.dart';
 
 class Splash extends StatelessWidget {
@@ -29,7 +30,7 @@ class LaunchScreenState extends State<LaunchScreen> {
 
     Future.delayed(const Duration(milliseconds: 3000), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const NewsHub()));
+          context, MaterialPageRoute(builder: (context) =>  LandingPage()));
     });
   }
 
