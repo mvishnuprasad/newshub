@@ -31,6 +31,7 @@ class NewsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var savedTitle = ref.watch(savedTitleProvider);
+    var savedNews = ref.watch(savedNewsProvider);
     double padding = 10;
     double width = MediaQuery.of(context).size.width;
     var newsModel = NewsModel(
@@ -186,6 +187,7 @@ class NewsCard extends ConsumerWidget {
                                       .read(savedTitleProvider.notifier)
                                       .state
                                       .any((item) => item == newsModel.title);
+                                  savedNews.add(newsModel);
 
                                   if (!titleExists) {
                                     savedTitle.add(title);

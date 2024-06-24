@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:newshub/pages/saved_detailnews.dart';
+import 'package:hive/hive.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newshub/persistance/hive_methods.dart';
 import 'package:newshub/services/dataprovider.dart';
@@ -30,7 +31,10 @@ class SavedNewsCard extends ConsumerWidget {
     final savedArticles = ref.read(savedNewsProvider);
     var savedTitle = ref.watch(savedTitleProvider);
     var newsModel = NewsModel(
-        title: title, author: author, source: source, category: category);
+        title: title,
+        author: author,
+        source: source,
+        category: category);
     return Center(
       child: Column(children: [
         Container(
@@ -86,13 +90,13 @@ class SavedNewsCard extends ConsumerWidget {
                                   context: context,
                                   isScrollControlled: true,
                                   builder: (context) => SavedDetailNews(
-                                        title: title,
-                                        author: author,
-                                        source: source,
-                                        category: category,
-                                        description: description,
-                                      ) // The page to display as a bottom sheet
-                                  );
+                                    title: title,
+                                    author: author,
+                                    source: source,
+                                    category: category,
+                                    description: description,
+                                  ) // The page to display as a bottom sheet
+                              );
                             },
                             child: Text(
                               title,
@@ -131,7 +135,7 @@ class SavedNewsCard extends ConsumerWidget {
                                   ),
                                   const Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 8.0),
+                                    EdgeInsets.symmetric(horizontal: 8.0),
                                     child: Icon(
                                       Icons.circle,
                                       size: 6,
@@ -163,7 +167,7 @@ class SavedNewsCard extends ConsumerWidget {
                                     savedArticles.removeAt(index);
                                     savedTitle.remove(title);
                                     ref.read(savedNewsProvider.notifier).update(
-                                        (state) => savedArticles.toList());
+                                            (state) => savedArticles.toList());
                                     ref
                                         .read(savedTitleProvider.notifier)
                                         .update((state) => savedTitle.toList());
