@@ -1,7 +1,7 @@
 # newshub
 
 Demo project for riverpod, dio and hive packages 
-Instant news at your fingertips.
+
 
 ## Description
 Stay informed with QuickNews, your go-to source for up-to-the-minute headlines and stories. 
